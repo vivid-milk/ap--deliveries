@@ -20,15 +20,15 @@ let car = sprites.create(img`
 controller.moveSprite(car)
 scene.cameraFollowSprite(car)
 let inventory: color[] = []
-let housesinfo: number[][] = []
-let giftsinfo: number[][] = []
+let housesinfo: number[][] = [] //column, row, color ordered
+let giftsinfo: number[][] = [] //column, row, color ordered
 let winningScore = 0 // when the players score is equal to this number then the round ends
 let currentLevel = 1
 
 setLevel(currentLevel)
 
 //hard coding of levels instead of random locations
-//column then row then color
+
 function setLevel(level: number){
     info.setScore(0)
     if(level == 1){
@@ -38,51 +38,55 @@ function setLevel(level: number){
         giftsinfo[0] = [5,4,2] // one gift
         winningScore = 1
     } else if(level == 2){
+        currentLevel = 2
         tiles.placeOnTile(car,tiles.getTileLocation(5,5))
         tiles.setTilemap(tilemap`level2`)
         housesinfo[0] = [8, 9, 2] 
         housesinfo[1] = [2, 9, 5]
         giftsinfo[0] = [2, 6, 2] // two gifts
         giftsinfo[1] = [6, 13, 5]
+        inventory = []
         winningScore = 2
     }
 }
 
 
-let surroundings: number[] = [] // stores if there is a house/gift and then the color of it
+let surroundings: number[] = [] // stores if there is a house/gift, the color of it, and the index of it from 
 game.onUpdate(function(){
     if (controller.A.isPressed()){
         surroundings = checkSurroundingTiles(car)
         if (surroundings[0] == 1) { // check for gifts
             inventory.push(surroundings[1])
-            tiles.setTileAt(tiles.getTileLocation(giftsinfo[0][0], giftsinfo[0][1]), img`.`) // need to make dynamic
-            giftsinfo[0] = [-10,-10]
+            tiles.setTileAt(tiles.getTileLocation(giftsinfo[surroundings[2]][0], giftsinfo[surroundings[2]][1]), img`.`)
+            giftsinfo[surroundings[2]] = [-10,-10]
         }
         if(surroundings[0] == 0){ // check for houses
             for (let i = 0; i < 3; i++) {
                 if(inventory[i] == surroundings[1]){
-                    inventory[0] = null
+                    inventory[i] = null
                     info.changeScoreBy(1)
                 }
             }
         }
     }
-    if(info.score() == winningScore){
-        game.splash("level" + currentLevel + "Complete!")
+    if(info.score() >= winningScore){
+        game.splash("level " + currentLevel + " Complete!")
         setLevel(currentLevel + 1)
     }
 })
 
 function checkSurroundingTiles(sprite: Sprite){ // checks around sprite for gift or house
-    //sequencing. if was in other order would quit code when detected house so in this method detects gift then picks up gift then on next calling would detect house 
-    if (sprite.tilemapLocation().column == giftsinfo[0][0] || sprite.tilemapLocation().column == giftsinfo[0][0] + 1 || sprite.tilemapLocation().column == giftsinfo[0][0] - 1) {
-        if (sprite.tilemapLocation().row == giftsinfo[0][1] || sprite.tilemapLocation().row == giftsinfo[0][1] + 1 || sprite.tilemapLocation().row == giftsinfo[0][1] - 1) {
-            return [1, giftsinfo[0][2]]
+    //sequencing. has bias towards gifts because gifts dissapear. if bias to house then would never pick up gift
+    for(let i = 0; i < giftsinfo.length; i++){
+        if (sprite.tilemapLocation().column == giftsinfo[i][0] || sprite.tilemapLocation().column == giftsinfo[i][0] + 1 || sprite.tilemapLocation().column == giftsinfo[i][0] - 1) {
+            if (sprite.tilemapLocation().row == giftsinfo[i][1] || sprite.tilemapLocation().row == giftsinfo[i][1] + 1 || sprite.tilemapLocation().row == giftsinfo[i][1] - 1) {
+                return [1, giftsinfo[i][2], i] // only this needs the "i" because gifts get deleted from tilemap
+            }
         }
-    }
-    if (sprite.tilemapLocation().column == housesinfo[0][0] || sprite.tilemapLocation().column == housesinfo[0][0] + 1 || sprite.tilemapLocation().column == housesinfo[0][0] - 1) {
-        if (sprite.tilemapLocation().row == housesinfo[0][1] || sprite.tilemapLocation().row == housesinfo[0][1] + 1 || sprite.tilemapLocation().row == housesinfo[0][1] - 1) {
-            return [0, housesinfo[0][2]]
+        if (sprite.tilemapLocation().column == housesinfo[i][0] || sprite.tilemapLocation().column == housesinfo[i][0] + 1 || sprite.tilemapLocation().column == housesinfo[i][0] - 1) {
+            if (sprite.tilemapLocation().row == housesinfo[i][1] || sprite.tilemapLocation().row == housesinfo[i][1] + 1 || sprite.tilemapLocation().row == housesinfo[i][1] - 1) {
+                return [0, housesinfo[i][2]]
+            }
         }
     }
     return [-1, 16] // 16 is the color-code for black
