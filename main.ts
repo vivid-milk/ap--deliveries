@@ -24,6 +24,7 @@ let housesinfo: number[][] = [] //column, row, color ordered
 let giftsinfo: number[][] = [] //column, row, color ordered
 let winningScore = 0 // when the players score is equal to this number then the round ends
 let currentLevel = 1
+let gas = 20
 
 setLevel(currentLevel)
 
@@ -39,14 +40,25 @@ function setLevel(level: number){
         winningScore = 1
     } else if(level == 2){
         currentLevel = 2
-        tiles.placeOnTile(car,tiles.getTileLocation(5,5))
         tiles.setTilemap(tilemap`level2`)
+        tiles.placeOnTile(car, tiles.getTileLocation(5, 5))
         housesinfo[0] = [8, 9, 2] 
         housesinfo[1] = [2, 9, 5]
         giftsinfo[0] = [2, 6, 2] // two gifts
         giftsinfo[1] = [6, 13, 5]
         inventory = []
         winningScore = 2
+    } else if (level == 3) {
+        currentLevel = 3
+        tiles.setTilemap(tilemap`level3`)
+        tiles.placeOnTile(car, tiles.getTileLocation(4, 4))
+        housesinfo[0] = [7, 9, 2]
+        housesinfo[1] = [3, 9, 5]
+        giftsinfo[0] = [3, 5, 2] // two gifts
+        giftsinfo[1] = [3, 6, 5]
+        giftsinfo[2] = [7, 8, 5]
+        inventory = []
+        winningScore = 3
     }
 }
 
@@ -69,6 +81,7 @@ game.onUpdate(function(){
             }
         }
     }
+    if(car.vx != 0 || car.vy != 0){gas -=.5}
     if(info.score() >= winningScore){
         game.splash("level " + currentLevel + " Complete!")
         setLevel(currentLevel + 1)
@@ -83,6 +96,8 @@ function checkSurroundingTiles(sprite: Sprite){ // checks around sprite for gift
                 return [1, giftsinfo[i][2], i] // only this needs the "i" because gifts get deleted from tilemap
             }
         }
+    }
+    for (let i = 0; i < housesinfo.length; i++) {
         if (sprite.tilemapLocation().column == housesinfo[i][0] || sprite.tilemapLocation().column == housesinfo[i][0] + 1 || sprite.tilemapLocation().column == housesinfo[i][0] - 1) {
             if (sprite.tilemapLocation().row == housesinfo[i][1] || sprite.tilemapLocation().row == housesinfo[i][1] + 1 || sprite.tilemapLocation().row == housesinfo[i][1] - 1) {
                 return [0, housesinfo[i][2]]
@@ -92,8 +107,12 @@ function checkSurroundingTiles(sprite: Sprite){ // checks around sprite for gift
     return [-1, 16] // 16 is the color-code for black
 }
 scene.createRenderable(scene.HUD_Z, function(target: Image, camera: scene.Camera){
+    //inventory in bottom left hand corner
     screen.fillRect(0,110,30,10,6)
     screen.fillRect(2,112,6,6,inventory[0])
     screen.fillRect(12, 112, 6, 6, inventory[1])
     screen.fillRect(22, 112, 6, 6, inventory[2])
+    
+    //gas meter in top left corner
+    screen.fillRect(0,0,10,10,16)
 })
