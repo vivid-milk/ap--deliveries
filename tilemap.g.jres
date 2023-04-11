@@ -16,6 +16,24 @@
         "tilemapTile": true,
         "displayName": "myTile"
     },
+    "tile3": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "myTile1"
+    },
+    "tile4": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAPD///8PAAAA7+7u7g8AAPBeVVXlDwAA71WVmeUPAPBeVZWZ5Q8A71VVVVXlD/BeVVVVVeUP8F5VVVVV5Q8A71VV5e7uDwDwXlXl/u4PAADvVVVV5Q8AAPBeVVXlDwAAAO/u7u4PAAAA8P///w8AAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "myTile2"
+    },
+    "tile5": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA////DwAA8P9VVVX1AAAf8VVVVfUAAB8RERER8QAA8BERERHxAAAA/1VVVfUAAAD/VVVV9QAA8BERERHxAAAfEREREfEAAB/xVVVV9QAA8P9VVVX1AAAAAP///w8AAAAAAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "myTile3"
+    },
     "level1": {
         "id": "level1",
         "mimeType": "application/mkcd-tilemap",
@@ -36,6 +54,28 @@
             "sprites.vehicle.roadIntersection4"
         ],
         "displayName": "level1"
+    },
+    "level2": {
+        "id": "level2",
+        "mimeType": "application/mkcd-tilemap",
+        "data": "MTAxMDAwMTAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAyMDMwMzAzMDMwYTAwMDAwMDAwMDAwMDAyMDMwMzAzMDQwMDAwMDAwMDAxMDAwMDAwMDAwMDAwMDEwNTAwMDAwMTAwMDAwMDAwMDEwMDAwMDAwMDAwMDAwMTAwMDAwMDAxMDAwMDAwMDAwMTAwMDAwMDAwMDAwMDAxMDAwMDAwMDEwMDAwMDAwMDAxMDAwMDAwMDAwMDAwMDEwYzAwMDAwMTAwMDAwNjAwMDEwMDAwMDAwMDAwMDAwNzAzMGIwMzA5MDMwMzBiMDMwODAwMDAwMDAwMDAwMDAwMDAwMTAwMDAwMDAwMDEwMDAwMDAwMDAwMDAwMDAwMDAwMDA3MDMwMzAzMDMwODAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMGQwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIwMjAwMDAyMDIyMjIwMjAwMDAyMjIyMjAyMjIyMDIyMjAyMjIyMjIwMjIyMjAyMjIwMjIyMjIyMDIyMjIwMjIyMDIyMjIyMjAyMjIyMDIyMjAyMjIyMjIwMjIyMjAyMDAwMDAwMDAyMDIyMjIyMjAyMjIyMjIwMjIyMjIyMjIwMjAwMDAyMDIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMg==",
+        "tileset": [
+            "myTiles.transparency16",
+            "sprites.vehicle.roadVertical",
+            "sprites.vehicle.roadTurn1",
+            "sprites.vehicle.roadHorizontal",
+            "sprites.vehicle.roadIntersection4",
+            "myTiles.tile2",
+            "myTiles.tile1",
+            "sprites.vehicle.roadTurn3",
+            "sprites.vehicle.roadTurn4",
+            "sprites.vehicle.roadIntersection1",
+            "sprites.vehicle.roadTurn2",
+            "sprites.vehicle.roadIntersection3",
+            "myTiles.tile4",
+            "myTiles.tile5"
+        ],
+        "displayName": "level2"
     },
     "*": {
         "mimeType": "image/x-mkcd-f4",
